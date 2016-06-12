@@ -1,0 +1,11 @@
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType img/2048.png "access 1 year"
+ExpiresByType img/cam_be_like.jpg "access 1 year"
+ExpiresByType img/mobilewebdev.jpg "access 1 year"
+ExpiresByType img/profilepic.jpg "access 1 year"
+ExpiresByType views/images/pizza.jpg "access 1 year"
+ExpiresByType views/images/pizzeria.jpg "access 1 year"
+</IfModule>
+## EXPIRES CACHING ##
