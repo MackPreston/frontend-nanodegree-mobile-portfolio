@@ -3,6 +3,9 @@
 ## Description
 This is a project for the Frontend Web Development Nanodegree from Udacity. The assignment was to optimize a given website using various techniques described below.
 
+## Try it Out!
+You can run the optimized version [here](https://mackpreston.github.io/frontend-nanodegree-mobile-portfolio/)
+
 ## Optimizations Made
 Here is a list of some of the optimizations that were made to the site to improve its performance and load-time.
 
