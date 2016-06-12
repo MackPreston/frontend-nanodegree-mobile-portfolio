@@ -18,5 +18,5 @@ Here is a list of some of the optimizations that were made to the site to improv
 ### JS Optimizations
 - Reduced number of pizzas loaded on page to 50 (200 was way more than we needed)
 - Moved Pagescroll calculation to a variable outside of the for loop because it was constant.
-- Removed modulos operation and replaced with an array of 5 calculations,
-instead of repeating the 5 for however many pizzas are loaded
+- Removed modulos operation and replaced with an array of 5 calculations, instead of repeating the 5 for however many pizzas are loaded
+- Stopped layout thrashing by moving setting the new width of the pizzas outside of the loop

@@ -447,14 +447,27 @@ var resizePizzas = function(size) {
     return dx;
   }
 
+
+  //Pizza containers.width element is set outside of loop to prevent layout
+  var pizzaContainers = document.querySelectorAll(".randomPizzaContainer");
+  var pizzaLength = pizzaContainers.length;
+  var dx = determineDx(pizzaContainers[0], size);
+  var newWidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
+
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    for (var pizza = 0; pizza < pizzaLength; pizza++) {
+      pizzaContainers[pizza].style.width = newWidth;
     }
   }
+  // // Iterates through pizza elements on the page and changes their widths
+  // function changePizzaSizes(size) {
+  //   for (var i = 0; i < document.getElementsByClassName("randomPizzaContainer").length; i++) {
+  //     var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[i], size);
+  //     var newwidth = (document.getElementsByClassName("randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+  //     document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+  //   }
+  // }
 
   changePizzaSizes(size);
 
@@ -497,8 +510,11 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-  var phases = [0,0,0,0,0];
+
+
+var phases = [0,0,0,0,0];
 function updatePositions() {
+  ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
 
