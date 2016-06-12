@@ -13,7 +13,7 @@ Here is a list of some of the optimizations that were made to the site to improv
 - Removed font because the download was unnecessary
 - Inlined CSS
 - Added viewport and metadata to pizza.html
--
+- Added .htaccess for caching
 
 ### JS Optimizations
 - Reduced number of pizzas loaded on page to 50 (200 was way more than we needed)
