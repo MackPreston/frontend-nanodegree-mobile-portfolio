@@ -514,7 +514,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 var phases = [0,0,0,0,0];
 function updatePositions() {
-  ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
 
