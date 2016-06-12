@@ -58,8 +58,8 @@ pizzaIngredients.meats = [
 ];
 pizzaIngredients.nonMeats = [
   "White Onions",
-  "Red Onions",
   "Sauteed Onions",
+  "Red Onions",
   "Green Peppers",
   "Red Peppers",
   "Banana Peppers",
@@ -497,14 +497,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+  var phases = [0,0,0,0,0];
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  //Get items by className is faster
+  var items = document.getElementsByClassName('mover')
+  //Reduce calculations from 50 to 5 by moving the phases into an array of 5
+  //instead of redoing the calculation with %5
+  for (var i = 0; i < 5; i++){
+    phases[i] = Math.sin((document.body.scrollTop / 1250) + i);
+  }
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    // console.log(document.body.scrollTop + " " + i );
+    items[i].style.left = items[i].basicLeft + 100 * phases[i % 5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -524,7 +531,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
