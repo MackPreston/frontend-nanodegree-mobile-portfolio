@@ -449,7 +449,7 @@ var resizePizzas = function(size) {
 
 
   //Pizza containers.width element is set outside of loop to prevent layout
-  var pizzaContainers = document.querySelectorAll(".randomPizzaContainer");
+  var pizzaContainers = document.getElementByClassName("randomPizzaContainer");
   var pizzaLength = pizzaContainers.length;
   var dx = determineDx(pizzaContainers[0], size);
   var newWidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
@@ -512,23 +512,22 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 
 
-var phases = [0,0,0,0,0];
+var phases = new Array(5);
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
   //Get items by className is faster
   var items = document.getElementsByClassName('mover')
   //Reduce calculations from 50 to 5 by moving the phases into an array of 5
   //instead of redoing the calculation with %5
+  var docScroll = (document.body.scrollTop / 1250);
   for (var i = 0; i < 5; i++){
-    phases[i] = Math.sin((document.body.scrollTop / 1250) + i);
+    phases[i] = Math.sin(docScroll+ i) *100 + 900;
   }
   for (var i = 0; i < items.length; i++) {
-    // console.log(document.body.scrollTop + " " + i );
-    items[i].style.left = items[i].basicLeft + 100 * phases[i % 5] + 'px';
+    var left = -items[i].basicLeft + phases[i%5] + 'px';
+    items[i].style.transform = "translateX(" + left;
   }
-
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
@@ -540,13 +539,16 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', function(){
+	//Optimizes paint by requesting an animation frame when scrolling
+	window.requestAnimationFrame(updatePositions);
+});
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 40; i++) {
+  for (var i = 0; i < 31; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";

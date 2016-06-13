@@ -23,3 +23,4 @@ Here is a list of some of the optimizations that were made to the site to improv
 - Moved Pagescroll calculation to a variable outside of the for loop because it was constant.
 - Removed modulos operation and replaced with an array of 5 calculations, instead of repeating the 5 for however many pizzas are loaded
 - Stopped layout thrashing by moving setting the new width of the pizzas outside of the loop
+- Swtiched to translateX instead of style.left
