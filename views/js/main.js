@@ -449,7 +449,7 @@ var resizePizzas = function(size) {
 
 
   //Pizza containers.width element is set outside of loop to prevent layout
-  var pizzaContainers = document.getElementByClassName("randomPizzaContainer");
+  var pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
   var pizzaLength = pizzaContainers.length;
   var dx = determineDx(pizzaContainers[0], size);
   var newWidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
